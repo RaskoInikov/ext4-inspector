@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "ui_main.h"
+#include "utils.h"
+
 static int require_arguments(const char *program_name, const char *command,
                              int actual, int expected)
 {
@@ -139,6 +142,17 @@ static int run_command(const char *program_name, int argc, char *argv[])
         }
 
         return analyzer_ext4_restore_super(argv[1], argv[2], write_enabled);
+    }
+
+    if (strcmp(command, "ui") == 0) {
+        if (require_arguments(program_name,
+                              command,
+                              argc - 1,
+                              0) != 0) {
+            return 1;
+        }
+
+        return ui_main_run();
     }
 
     if (strcmp(command, "stat") == 0) {

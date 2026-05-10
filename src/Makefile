@@ -1,5 +1,6 @@
 CC := gcc
 PROGRAM := fs_tool
+NCURSES_LIBS := -lncursesw
 
 SRC_DIR := src
 DEBUG_DIR := build/debug
@@ -20,6 +21,9 @@ SOURCES := $(SRC_DIR)/main.c \
            $(SRC_DIR)/ext4_recovery.c \
            $(SRC_DIR)/ext4_search.c \
            $(SRC_DIR)/ext4_super.c \
+	       $(SRC_DIR)/ui_main.c \
+           $(SRC_DIR)/ui_panel.c \
+           $(SRC_DIR)/ui_input.c \
            $(SRC_DIR)/utils.c
 
 COMMON_CFLAGS := -std=c11 -Wall -Wextra -pedantic -Werror -D_GNU_SOURCE
@@ -39,11 +43,11 @@ test: $(DEBUG_DIR)/ext4_metadata_tests
 
 $(DEBUG_DIR)/$(PROGRAM): $(SOURCES)
 	@mkdir -p $(DEBUG_DIR)
-	$(CC) $(DEBUG_CFLAGS) -o $@ $(SOURCES)
+	$(CC) $(DEBUG_CFLAGS) -o $@ $(SOURCES) $(NCURSES_LIBS)
 
 $(RELEASE_DIR)/$(PROGRAM): $(SOURCES)
 	@mkdir -p $(RELEASE_DIR)
-	$(CC) $(RELEASE_CFLAGS) -o $@ $(SOURCES)
+	$(CC) $(RELEASE_CFLAGS) -o $@ $(SOURCES) $(NCURSES_LIBS)
 
 $(DEBUG_DIR)/ext4_metadata_tests: tests/ext4_metadata_tests.c \
                                   $(SRC_DIR)/errors.c \
