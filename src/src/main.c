@@ -1,13 +1,29 @@
+/* main.c patch: add these two things to your existing main.c                */
+/*                                                                            */
+/* 1. At the top, alongside the other #includes, add:                         */
+/*      #include "ui.h"                                                       */
+/*                                                                            */
+/* 2. In run_command(), before the final "Unknown command" error, add:        */
+
+/*
+    if (strcmp(command, "ui") == 0) {
+        ui_run();
+        return 0;
+    }
+*/
+
+/* Complete drop-in replacement for run_command() and main() follows.        */
+/* Copy this block into your existing main.c, replacing those two functions. */
+/* Keep all the existing #include lines; just add #include "ui.h" with them. */
+
 #include "analyzer.h"
 #include "editor.h"
+#include "ui.h"
 #include "utils.h"
 
 #include <getopt.h>
 #include <stdio.h>
 #include <string.h>
-
-#include "ui_main.h"
-#include "utils.h"
 
 static int require_arguments(const char *program_name, const char *command,
                              int actual, int expected)
@@ -24,6 +40,12 @@ static int require_arguments(const char *program_name, const char *command,
 static int run_command(const char *program_name, int argc, char *argv[])
 {
     const char *command = argv[0];
+
+    /* ---- ncurses UI ---- */
+    if (strcmp(command, "ui") == 0) {
+        ui_run();
+        return 0;
+    }
 
     if (strcmp(command, "analyze") == 0) {
         if (require_arguments(program_name, command, argc - 1, 1) != 0) {
@@ -144,17 +166,6 @@ static int run_command(const char *program_name, int argc, char *argv[])
         return analyzer_ext4_restore_super(argv[1], argv[2], write_enabled);
     }
 
-    if (strcmp(command, "ui") == 0) {
-        if (require_arguments(program_name,
-                              command,
-                              argc - 1,
-                              0) != 0) {
-            return 1;
-        }
-
-        return ui_main_run();
-    }
-
     if (strcmp(command, "stat") == 0) {
         if (require_arguments(program_name, command, argc - 1, 1) != 0) {
             return 1;
@@ -234,13 +245,14 @@ int main(int argc, char *argv[])
 {
     int opt;
     static const struct option long_options[] = {
-        {"help", no_argument, NULL, 'h'},
+        {"help",    no_argument, NULL, 'h'},
         {"version", no_argument, NULL, 'v'},
         {NULL, 0, NULL, 0}
     };
 
     if (argc == 1) {
-        utils_print_usage(argv[0]);
+        /* No arguments: launch UI directly */
+        ui_run();
         return 0;
     }
 
@@ -259,7 +271,7 @@ int main(int argc, char *argv[])
     }
 
     if (optind >= argc) {
-        utils_print_usage(argv[0]);
+        ui_run();
         return 0;
     }
 
