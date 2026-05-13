@@ -378,17 +378,26 @@ static int ui_menu_run(const char *title,
     for (;;) {
         int content_rows = g_rows - 3;
 
+        erase();
+
         ui_draw_bar(0,
                     " fs_tool | Ext4 Filesystem Analyzer & Editor",
                     CP_STATUS);
 
         /* Title */
+        move(1, 0);
+        clrtoeol();
+
         attron(COLOR_PAIR(CP_TITLE) | A_BOLD);
         mvprintw(1, 2, "%.*s", g_cols - 4, title);
         attroff(COLOR_PAIR(CP_TITLE) | A_BOLD);
 
         /* Menu items */
         for (i = 0; i < count && i + 2 < content_rows + 2; ++i) {
+
+            move(i + 3, 0);
+            clrtoeol();
+
             if (i == sel) {
                 attron(COLOR_PAIR(CP_SELECT) | A_BOLD);
                 mvprintw(i + 3, 4, "  %-*s  ", g_cols - 12, items[i].label);

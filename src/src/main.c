@@ -1,21 +1,3 @@
-/* main.c patch: add these two things to your existing main.c                */
-/*                                                                            */
-/* 1. At the top, alongside the other #includes, add:                         */
-/*      #include "ui.h"                                                       */
-/*                                                                            */
-/* 2. In run_command(), before the final "Unknown command" error, add:        */
-
-/*
-    if (strcmp(command, "ui") == 0) {
-        ui_run();
-        return 0;
-    }
-*/
-
-/* Complete drop-in replacement for run_command() and main() follows.        */
-/* Copy this block into your existing main.c, replacing those two functions. */
-/* Keep all the existing #include lines; just add #include "ui.h" with them. */
-
 #include "analyzer.h"
 #include "editor.h"
 #include "ui.h"
