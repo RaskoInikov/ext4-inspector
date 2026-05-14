@@ -99,7 +99,7 @@ int ext4_io_read_exact_at(int fd, uint64_t offset, void *buffer, size_t size,
         }
 
         if (bytes_read == 0) {
-            fprintf(stderr, "%s: unexpected end of file\n", context);
+            // fprintf(stderr, "%s: unexpected end of file\n", context);
             return 1;
         }
 

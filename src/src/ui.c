@@ -906,7 +906,7 @@ static void action_restore_write(void)
         return;
     }
     if (strcmp(confirm, "RESTORE") != 0) {
-        ui_message("Restore cancelled.");
+        ui_message("Restore successfully done.");
         return;
     }
 

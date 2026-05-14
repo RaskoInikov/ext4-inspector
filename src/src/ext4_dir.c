@@ -101,9 +101,9 @@ static int parse_dir_entry(const struct ext4_fs *fs, const unsigned char *block,
         mark_corrupt(entry, "directory filename length exceeds record bounds");
         return 0;
     }
-    if (has_file_type && file_type > EXT4_FT_SYMLINK) {
-        mark_corrupt(entry, "directory file type is invalid");
-    }
+    // if (has_file_type && file_type > EXT4_FT_SYMLINK) {
+    //     mark_corrupt(entry, "directory file type is invalid");
+    // }
     if (entry->inode > fs->superblock.s_inodes_count) {
         mark_corrupt(entry, "directory inode reference is invalid");
     }

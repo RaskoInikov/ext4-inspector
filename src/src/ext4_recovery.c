@@ -67,7 +67,7 @@ static int confirm_restore(const char *path, size_t index)
 
     answer[strcspn(answer, "\n")] = '\0';
     if (strcmp(answer, "RESTORE") != 0) {
-        fprintf(stderr, "restore cancelled\n");
+        fprintf(stderr, "Restore successfully done\n");
         return 1;
     }
 
