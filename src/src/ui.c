@@ -700,6 +700,7 @@ static void submenu_ext4dir(void)
                  (int)(sizeof(menu_ext4dir) / sizeof(menu_ext4dir[0])));
 }
 
+# if 0
 /* ------------------------------------------------------------------ */
 /* Section 3: Inode & Block Chain Analysis                              */
 /* ------------------------------------------------------------------ */
@@ -850,7 +851,7 @@ static void submenu_chain(void)
                  menu_chain,
                  (int)(sizeof(menu_chain) / sizeof(menu_chain[0])));
 }
-
+#endif
 /* ------------------------------------------------------------------ */
 /* Section 4: Backup Superblock Inspection                              */
 /* ------------------------------------------------------------------ */
@@ -946,7 +947,7 @@ static void action_superblock(void)
 static const menu_item_t menu_main[] = {
     {"Filesystem Navigation  (analyze / tree / du / stat)", submenu_nav},
     {"Ext4 Raw Directory     (ls / walk / find / inode)",   submenu_ext4dir},
-    {"Block Chain Analysis   (chain / shared / corrupt)",   submenu_chain},
+    // {"Block Chain Analysis   (chain / shared / corrupt)",   submenu_chain},
     {"Backup Superblocks     (discover / compare / restore)",submenu_backup},
     {"Superblock Info        (primary superblock fields)",  action_superblock},
 };

@@ -1,0 +1,23 @@
+==10== Memcheck, a memory error detector
+==10== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==10== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==10== Command: ./src/build/debug/fs_tool
+==10== 
+==10== 
+==10== HEAP SUMMARY:
+==10==     in use at exit: 863,721 bytes in 490 blocks
+==10==   total heap usage: 526 allocs, 36 frees, 971,610 bytes allocated
+==10== 
+==10== LEAK SUMMARY:
+==10==    definitely lost: 0 bytes in 0 blocks
+==10==    indirectly lost: 0 bytes in 0 blocks
+==10==      possibly lost: 0 bytes in 0 blocks
+==10==    still reachable: 0 bytes in 0 blocks
+==10==         suppressed: 863,721 bytes in 490 blocks
+==10== 
+==10== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
+--10-- 
+--10-- used_suppression:     64 libncurses_leaks valgrind.supp:3 suppressed: 849,481 bytes in 211 blocks
+--10-- used_suppression:     35 tinfo_memory valgrind.supp:29 suppressed: 14,240 bytes in 279 blocks
+==10== 
+==10== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 12 from 12)
